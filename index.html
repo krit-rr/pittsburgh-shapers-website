@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pittsburgh Global Shapers Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --black: #0a0a0a;
+    --yellow: #FFD600;
+    --blue: #1A4FFF;
+    --white: #F5F5F0;
+    --gray: #1c1c1c;
+    --mid: #2e2e2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 48px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,214,0,0.12);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--yellow);
+  }
+
+  .nav-logo span { color: var(--white); }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: .75rem 3rem;
+    margin: .25rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.2);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav-btn:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    background: rgba(255,214,0,0.06);
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(26,79,255,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255,214,0,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7rem, 9rem);
+    line-height: 0.92;
+    letter-spacing: 0.04em;
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s forwards;
+  }
+
+  .hero-title .accent { color: var(--yellow); }
+  .hero-title .blue-accent { color: var(--blue); }
+
+  .hero-sub {
+    max-width: 90%;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    color: rgba(245,245,240,0.65);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.65s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,214,0,0.25);
+  }
+
+  .btn-outline {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 15px 32px;
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--blue);
+    color: #6b9fff;
+    transform: translateY(-2px);
+  }
+
+  .hero-line {
+    position: absolute;
+    bottom: 0; left: 48px;
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--yellow));
+    animation: fadeUp 1s 1s forwards;
+    opacity: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-wrapper {
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--yellow);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 48px;
+  }
+
+  /* OVERVIEW */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .overview-card {
+    background: var(--gray);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .overview-card:hover { background: var(--mid); }
+
+  .overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--yellow);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+
+  .overview-card:hover::before { transform: scaleY(1); }
+
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .card-body {
+    font-size: 0.9rem;
+    color: rgba(245,245,240,0.55);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .card-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s;
+  }
+
+  .card-link:hover { gap: 14px; }
+  .card-link::after { content: '→'; }
+
+  /* EVENTS */
+  .events-block {
+    background: linear-gradient(135deg, var(--blue) 0%, #0a2bc2 100%);
+    padding: 56px;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+
+  .events-block::before {
+    content: 'EVENTS';
+    position: absolute;
+    right: -20px; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.05);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .events-block .section-label { color: rgba(255,255,255,0.6); }
+  .events-block .section-label::before { background: rgba(255,255,255,0.6); }
+
+  .event-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .event-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--yellow);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .event-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .event-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  .btn-white {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    background: var(--white);
+    color: var(--blue);
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-white:hover {
+    background: var(--yellow);
+    color: var(--black);
+    transform: translateY(-2px);
+  }
+
+  /* PROJECTS */
+  .project-card {
+    display: flex;
+    gap: 0;
+    background: var(--gray);
+    overflow: hidden;
+  }
+
+  .project-accent {
+    width: 6px;
+    background: linear-gradient(to bottom, var(--yellow), var(--blue));
+    flex-shrink: 0;
+  }
+
+  .project-content {
+    padding: 48px;
+    flex: 1;
+  }
+
+  .project-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    background: rgba(255,214,0,0.1);
+    padding: 4px 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .project-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    color: rgba(245,245,240,0.6);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 600px;
+  }
+
+  /* ROSTER */
+  .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .roster-card {
+    background: var(--gray);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .roster-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 10px;
+  }
+
+  .roster-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .roster-note {
+    font-size: 0.75rem;
+    color: rgba(245,245,240,0.4);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .roster-divider {
+    grid-column: 1 / -1;
+    height: 1px;
+    background: linear-gradient(to right, var(--yellow), var(--blue), transparent);
+    margin: 8px 0;
+  }
+
+  .incoming-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    background: var(--blue);
+    color: var(--white);
+    padding: 3px 8px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  /* PHOTOS */
+  .photos-placeholder {
+    background: var(--gray);
+    border: 2px dashed rgba(255,214,0,0.2);
+    padding: 80px 48px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .photos-icon {
+    font-size: 3rem;
+    opacity: 0.3;
+  }
+
+  .photos-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,214,0,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-logo span { color: var(--yellow); opacity: 1; }
+
+  .footer-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav {
+      width: 100%;
+      padding: 8px 6px;
+    }
+    .nav-links {
+      width: 100%;
+      display: flex;
+      gap: 4px;
+    }
+    .nav-btn {
+      flex: 1;
+      margin: .25rem .8rem;
+      padding: 10px 4px;
+      text-align: center;
+      font-size: clamp(0.6rem, 2.6vw, 0.8rem);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    section { padding: 72px 24px; }
+    #hero { padding: 100px 24px 60px; }
+    .hero-sub { font-size: 1.1rem; }
+    .overview-grid, .roster-grid { grid-template-columns: 1fr; }
+    .events-block { padding: 36px 28px; }
+    .project-content { padding: 32px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+  }
+
+  @media (max-width: 480px) {
+    nav {
+      width: 100%;
+      padding: 8px 6px;
+    }
+    .nav-links {
+      width: 100%;
+      display: flex;
+      gap: 4px;
+    }
+    .nav-btn {
+      flex: 1;
+      margin: .25rem .8rem;
+      padding: 10px 4px;
+      text-align: center;
+      font-size: clamp(0.6rem, 2.6vw, 0.8rem);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 13vw, 4rem);
+    }
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <!-- <div class="nav-logo"><span>PITTSBURGH</span> SHAPERS</div> -->
+  <div class="nav-links">
+    <a href="#overview" class="nav-btn">Overview</a>
+    <a href="#events" class="nav-btn">Events</a>
+    <!-- <a href="#projects" class="nav-btn">Projects</a> -->
+    <a href="#roster" class="nav-btn">Roster</a>
+    <a href="#photos" class="nav-btn">Photos</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg"></div>
+  <!-- <div class="hero-tag">A World Economic Forum Initiative</div> -->
+  <h1 class="hero-title">
+    GLOBAL SHAPERS<br>
+    <span class="accent">PITTSBURGH HUB</span>
+  </h1>
+  <p class="hero-sub">A World Economic Forum initiative to inspire young leaders aged 18-27 to shape the future through community, innovation, and impact. This hub is proud to represent the City of Bridges.</p>
+  <div class="hero-actions">
+    <a href="https://wefglobal.eu.qualtrics.com/jfe/form/SV_6F4bAg3fL2x1eXb?fbclid=PAQ0xDSwMCONdleHRuA2FlbQIxMQABp6lSNoShcx7AEB9r896XtR1tMwrZiRL-MidbT45nWKzRbRXDtqgcng6BWGYI_aem_fFX53n1exgnbmPUun7e1Iw" target="_blank" class="btn-primary">Apply Now</a>
+    <a href="#overview" class="btn-outline">Learn More</a>
+  </div>
+  <div class="hero-line"></div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section-wrapper" id="overview">
+  <section>
+    <div class="section-label reveal">Overview</div>
+    <h2 class="section-title reveal">WHO WE ARE</h2>
+    <div class="overview-grid">
+      <div class="overview-card reveal">
+        <div class="card-icon"></div>
+        <div class="card-title">Global Shapers </div>
+        <div class="card-body">Created by the World Economic Forum, the Global Shapers are a network of hubs based in cities around the world, each led by young people who are driven to make a contribution to their communities. </div>
+        <a href="https://www.globalshapers.org" target="_blank" class="card-link">Explore the Network</a>
+      </div>
+      <div class="overview-card reveal">
+        <div class="card-icon"></div>
+        <div class="card-title">Join Our Hub</div>
+        <div class="card-body">We're looking for passionate young leaders between 18-27 based in Pittsburgh who want to drive meaningful change here and beyond. Ready to apply?</div>
+        <a href="https://wefglobal.eu.qualtrics.com/jfe/form/SV_6F4bAg3fL2x1eXb?fbclid=PAQ0xDSwMCONdleHRuA2FlbQIxMQABp6lSNoShcx7AEB9r896XtR1tMwrZiRL-MidbT45nWKzRbRXDtqgcng6BWGYI_aem_fFX53n1exgnbmPUun7e1Iw" target="_blank" class="card-link">Apply Now</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- EVENTS -->
+<div class="section-wrapper" id="events">
+  <section>
+    <div class="section-label reveal">Events</div>
+    <h2 class="section-title reveal">WHAT'S HAPPENING</h2>
+    <div class="events-block reveal">
+      <div class="section-label">Featured</div>
+      <div class="event-item">
+        <div class="event-dot"></div>
+        <div>
+          <div class="event-name">2026 Northeast Hubs Retreat</div>
+          <div class="event-desc">Pittsburgh is proud to be hosting the 2026 Northeast Hubs retreat from May 15-17th. Visit the retreat site to learn more!</div>
+          <a href="https://retreat2026.pittsburghshapers.org" target="_blank" class="btn-white">Visit Retreat Site</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROJECTS -->
+<!-- <div class="section-wrapper" id="projects">
+  <section>
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal">OUR WORK</h2>
+    <div class="project-card reveal">
+      <div class="project-accent"></div>
+      <div class="project-content">
+        <div class="project-tag">Active Project</div>
+        <div class="project-name">InvolveMint</div>
+        <div class="project-desc">InvolveMint is a platform that connects community members with local nonprofits, rewarding civic engagement and making it easier to contribute to the Pittsburgh community.</div>
+      </div>
+    </div>
+  </section>
+</div> -->
+
+<!-- ROSTER -->
+<div class="section-wrapper" id="roster">
+  <section>
+    <div class="section-label reveal">Hub Member Roster</div>
+    <h2 class="section-title reveal">THE TEAM</h2>
+    <div class="roster-grid">
+      <div class="roster-card reveal">
+        <div class="roster-role">Curator</div>
+        <div class="roster-name">Steven Guo</div>
+      </div>
+      <div class="roster-card reveal">
+        <div class="roster-role">Vice Curator</div>
+        <div class="roster-name">Andrew Coutinho</div>
+      </div>
+      <div class="roster-card reveal">
+        <div class="roster-role">Impact Officer</div>
+        <div class="roster-name">Heena Baharte</div>
+      </div>
+
+      <div class="roster-divider"></div>
+
+      <div class="roster-card reveal">
+        <div class="incoming-badge">Incoming</div>
+        <div class="roster-role">Curator</div>
+        <div class="roster-name">Andrew Coutinho</div>
+      </div>
+      <div class="roster-card reveal">
+        <div class="incoming-badge">Incoming</div>
+        <div class="roster-role">Vice Curator</div>
+        <div class="roster-name">Ian Chang</div>
+      </div>
+      <div class="roster-card reveal">
+        <div class="incoming-badge">Incoming</div>
+        <div class="roster-role">Impact Officer</div>
+        <div class="roster-name">Seong Kim</div>
+      </div>
+
+      <div class="roster-divider"></div>
+
+      <div class="roster-card reveal">
+        <div class="roster-role">Hub Member</div>
+        <div class="roster-name">Sarah Yeager</div>
+        <div class="roster-note">Founding Curator and Hub Member</div>
+      </div>
+      <div class="roster-card reveal">
+        <div class="roster-role">Hub Member</div>
+        <div class="roster-name">Michael Coutinho</div>
+        <div class="roster-note">Former Curator</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PHOTOS -->
+<div class="section-wrapper" id="photos">
+  <section>
+    <div class="section-label reveal">Photos</div>
+    <h2 class="section-title reveal">GALLERY</h2>
+    <div class="photos-placeholder reveal">
+      <div class="photos-icon">📸</div>
+      <div class="photos-text">Photos Coming Soon</div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>PITTSBURGH</span> HUB</div>
+  <div class="footer-note">World Economic Forum · Global Shapers</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active state
+  const sections = document.querySelectorAll('[id]');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navBtns.forEach(btn => {
+      btn.style.borderColor = btn.getAttribute('href') === '#' + current
+        ? 'rgba(255,214,0,0.6)' : 'rgba(255,255,255,0.15)';
+      btn.style.color = btn.getAttribute('href') === '#' + current
+        ? '#FFD600' : '';
+    });
+  });
+</script>
+</body>
+</html>
