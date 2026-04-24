@@ -110,7 +110,7 @@
 
   .hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 7rem, 9rem);
+    font-size: clamp(4rem, 6rem, 8rem);
     line-height: 0.92;
     letter-spacing: 0.04em;
     margin-top: 1.75rem;
@@ -379,6 +379,12 @@
   }
 
   /* PROJECTS */
+  .projects-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
   .project-card {
     display: flex;
     gap: 0;
@@ -413,7 +419,22 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3rem;
     letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .project-link {
+    display: inline-block;
+    font-size: 1rem;
     margin-bottom: 16px;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+
+  .project-link:hover {
+    text-decoration: underline;
   }
 
   .project-desc {
@@ -421,7 +442,7 @@
     color: rgba(245,245,240,0.6);
     line-height: 1.8;
     font-weight: 300;
-    max-width: 600px;
+    /* max-width: 600px; */
   }
 
   /* ROSTER */
@@ -509,7 +530,7 @@
     border-top: 1px solid rgba(255,255,255,0.08);
     padding: 40px 48px;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
   }
 
@@ -521,13 +542,6 @@
   }
 
   .footer-logo span { color: var(--yellow); opacity: 1; }
-
-  .footer-note {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.08em;
-  }
 
   /* ANIMATIONS */
   @keyframes fadeUp {
@@ -599,18 +613,16 @@
     }
 }
 
-
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <!-- <div class="nav-logo"><span>PITTSBURGH</span> SHAPERS</div> -->
   <div class="nav-links">
     <a href="#overview" class="nav-btn">Overview</a>
     <a href="#events" class="nav-btn">Events</a>
-    <!-- <a href="#projects" class="nav-btn">Projects</a> -->
+    <a href="#projects" class="nav-btn">Projects</a>
     <a href="#roster" class="nav-btn">Roster</a>
     <a href="#photos" class="nav-btn">Photos</a>
   </div>
@@ -624,7 +636,7 @@
     GLOBAL SHAPERS<br>
     <span class="accent">PITTSBURGH HUB</span>
   </h1>
-  <p class="hero-sub">A World Economic Forum initiative to inspire young leaders to shape the future through community, innovation, and impact. This hub is proud to represent the City of Bridges.</p>
+  <p class="hero-sub">An initiative to inspire young leaders to shape the future through community, innovation, and impact. This hub is proud to represent the City of Bridges.</p>
   <div class="hero-actions">
     <a href="https://wefglobal.eu.qualtrics.com/jfe/form/SV_6F4bAg3fL2x1eXb?fbclid=PAQ0xDSwMCONdleHRuA2FlbQIxMQABp6lSNoShcx7AEB9r896XtR1tMwrZiRL-MidbT45nWKzRbRXDtqgcng6BWGYI_aem_fFX53n1exgnbmPUun7e1Iw" target="_blank" class="btn-primary">Apply Now</a>
     <a href="#overview" class="btn-outline">Learn More</a>
@@ -675,20 +687,46 @@
 </div>
 
 <!-- PROJECTS -->
-<!-- <div class="section-wrapper" id="projects">
+<div class="section-wrapper" id="projects">
   <section>
     <div class="section-label reveal">Projects</div>
     <h2 class="section-title reveal">OUR WORK</h2>
-    <div class="project-card reveal">
-      <div class="project-accent"></div>
-      <div class="project-content">
-        <div class="project-tag">Active Project</div>
-        <div class="project-name">InvolveMint</div>
-        <div class="project-desc">InvolveMint is a platform that connects community members with local nonprofits, rewarding civic engagement and making it easier to contribute to the Pittsburgh community.</div>
+    
+    <div class="projects-container">
+      <!-- InvolveMint -->
+      <div class="project-card reveal">
+        <div class="project-accent"></div>
+        <div class="project-content">
+          <div class="project-tag">Active Project</div>
+          <div class="project-name">Circular Food Economy: Table to Farm</div>
+          <a href="https://involvemint.io/" class="project-link">InvolveMint's Website →</a>
+          <div class="project-desc">
+            This initiative addresses the lack of funding for environmental programs in underserved communities by creating an alternative, community-based marketplace. In partnership with involveMINT, the project builds a circular economy where residents earn “Impact Credits” by participating in social and environmental activities (like food recycling), which they can then use to access goods and services without cash.
+            <br><br>
+            The primary focus is on engaging youth in Pittsburgh, empowering them to become leaders and changemakers while supporting a broader network of residents and local businesses.
+            Key activities include food recycling and composting efforts (such as work at the Hazelwood site) and hosting community events like “Night of the Living Compost” to increase participation.
+            <br><br>
+            In the short term, the project aims to reduce food waste, generate local credits, and grow community engagement. Long term, it seeks to establish a resilient, self-sustaining circular economy and expand climate education among youth.
+            So far, the program has diverted significant food waste (73,000 lbs), facilitated credit exchanges, and hosted successful community events with strong participation. It collaborates with involveMINT and several local schools, businesses, and organizations.</div>
+        </div>
       </div>
+
+      <!-- STD-->
+      <div class="project-card reveal">
+        <div class="project-accent"></div>
+        <div class="project-content">
+          <div class="project-tag">Active Project</div>
+          <div class="project-name">Shred the Debt</div>
+          <a href="https://unduemedicaldebt.org/campaign/globalshaperspittsburgh-69824/" class="project-link">Hub Campaign Link →</a>
+          <div class="project-desc">Pittsburgh is in the U.S. Nationwide Shred the Debt campaign alongside 25+ hubs! This cross-hub project is in collaboration with Undue Medical Debt, which allows each dollar donated to eliminate $100 worth of medical debt. This means the collective goal of fundraising $100,000 by September 23rd would elimimate $10M+ in medical debt. 
+            <br>
+            Our hub's goal is $10,000, which would eliminate $100,000 worth of medical debt. Make sure to donate using the link above!</div>
+        </div>
+      </div>
+
     </div>
   </section>
-</div> -->
+</div>
 
 <!-- ROSTER -->
 <div class="section-wrapper" id="roster">
@@ -757,8 +795,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><span>PITTSBURGH</span> HUB</div>
-  <div class="footer-note">World Economic Forum · Global Shapers</div>
+  <div class="footer-logo">GLOBAL SHAPERS <span>PITTSBURGH</span></div>
 </footer>
 
 <script>
