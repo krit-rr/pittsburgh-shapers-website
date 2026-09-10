@@ -28,7 +28,7 @@
   },
   {
     "name": "Steven Guo",
-    "role": "Hub Member",
+    "role": "Alumni",
     "group": "members",
     "note": "Outgoing Curator",
     "linkedin": "https://www.linkedin.com/in/steven-c-guo/",
@@ -55,7 +55,7 @@
   },
   {
     "name": "Gisele DeWitt",
-    "role": "Hub Member",
+    "role": "Shred the Debt Project Lead, Member",
     "group": "members",
     "note": "",
     "linkedin": "https://www.linkedin.com/in/gisele-dewitt-55b75a210/",
@@ -124,5 +124,14 @@
     "linkedin": "https://www.linkedin.com/in/egshiglen/",
     "bio": "Egshiglen focuses on public policy and data analytics at Carnegie Mellon University, applying strategy and data-driven decision making for social good.",
     "photo": "egshiglen-batjargal"
+  },
+  {
+    "name": "Gabe Gamboa",
+    "role": "Hub Member",
+    "group": "members",
+    "note": "",
+    "linkedin": "https://www.linkedin.com/in/gabriel-gamboa-7878b11ba/",
+    "bio": "Gabe is a Business Analyst at the Bank of New York and holds a Bachelors of Science in Finance",
+    "photo": "gabe-gamboa"
   }
 ]
